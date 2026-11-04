@@ -1,69 +1,90 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Proyecto Task List",
+  description:
+    "Lista de tareas con ventana de visibilidad. Prueba de despliegue en AWS, Cloudflare y Vercel.",
+};
+
+const conceptos = [
+  {
+    nombre: "Fecha objetivo",
+    texto: "El día en que la tarea debe estar hecha.",
+  },
+  {
+    nombre: "Antelación",
+    texto: "Cuántos días antes quieres empezar a verla.",
+  },
+  {
+    nombre: "Ventana de visibilidad",
+    texto:
+      "Hasta que llega, la tarea no aparece en tu lista de trabajo, pero sigue en el calendario.",
+  },
+];
+
+const plataformas = ["AWS", "Cloudflare", "Vercel"];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-6 bg-white dark:bg-black sm:items-start md:px-16">
-        <Image
-          className="dark:invert h-5 w-25"
-          src="/next.svg"
-          alt="Logotipo de Next.js"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Para empezar, edita el archivo{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>
-            .
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-            ¿Buscas un punto de partida o más instrucciones? Visita las{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-12 px-6 py-12 md:px-10 md:py-20">
+      <header className="flex flex-col gap-4">
+        <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 md:text-5xl dark:text-zinc-50">
+          Proyecto Task List
+        </h1>
+        <p className="text-lg leading-8 text-zinc-800 dark:text-zinc-200">
+          Una lista de tareas personales para planificar a largo plazo sin
+          ruido. Cada tarea tiene una fecha objetivo y una antelación: no entra
+          en tu lista de trabajo hasta que llega su momento, pero siempre
+          puedes ver en qué fecha aparecerá.
+        </p>
+      </header>
+
+      <section aria-labelledby="como-funciona" className="flex flex-col gap-4">
+        <h2
+          id="como-funciona"
+          className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50"
+        >
+          Cómo funciona
+        </h2>
+        <ul className="grid gap-4 md:grid-cols-3">
+          {conceptos.map((concepto) => (
+            <li
+              key={concepto.nombre}
+              className="rounded-lg border border-zinc-400 p-4 dark:border-zinc-500"
             >
-              plantillas
-            </a>{" "}
-            o el{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <h3 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+                {concepto.nombre}
+              </h3>
+              <p className="mt-1 leading-7 text-zinc-800 dark:text-zinc-200">
+                {concepto.texto}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="despliegue" className="flex flex-col gap-4">
+        <h2
+          id="despliegue"
+          className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50"
+        >
+          Prueba de despliegue en AWS / Cloudflare / Vercel
+        </h2>
+        <p className="leading-7 text-zinc-800 dark:text-zinc-200">
+          Esta página sirve para comprobar que la aplicación se despliega y
+          responde en cada plataforma.
+        </p>
+        <ul className="flex flex-wrap gap-3">
+          {plataformas.map((plataforma) => (
+            <li
+              key={plataforma}
+              className="rounded-full border border-zinc-950 px-5 py-2 font-medium text-zinc-950 dark:border-zinc-50 dark:text-zinc-50"
             >
-              centro de aprendizaje
-            </a>
-            .
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-39.5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-3.5 w-4"
-              src="/vercel.svg"
-              alt=""
-              width={16}
-              height={14}
-            />
-            Desplegar ahora
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-39.5"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentación
-          </a>
-        </div>
-      </main>
-    </div>
+              {plataforma}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }
